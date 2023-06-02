@@ -1,0 +1,71 @@
+/*
+Theme Name: Neptune
+
+WooCommerce styles override
+*/
+
+// WooCommerce color variables
+// $woocommerce__color-error: #e2401c;
+// $woocommerce__color-success: #0f834d;
+// $woocommerce__color-info: #3d9cd2;
+// WooCommerce color variables
+$woocommerce__color-error: #ff5948;
+$woocommerce__color-success: #008a00;
+$woocommerce__color-info: orange;
+
+// Import variables and mixins.
+@import "../library/fonts/fonts.css";
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../../node_modules/bootstrap/scss/functions";
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+// @import "../../node_modules/bootstrap/scss/root";
+
+// 4. Include any optional Bootstrap CSS as needed
+// @import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/grid";
+
+// Import variables and mixins
+@import "abstracts/abstracts";
+
+/**
+ * Shop tables
+ */
+@import "plugins/woocommerce/tables";
+
+/**
+ * Products
+ */
+@import "plugins/woocommerce/products";
+
+/**
+ * Single product
+ */
+@import "plugins/woocommerce/single-product";
+
+/**
+ * Checkout
+ */
+@import "plugins/woocommerce/checkout";
+/**
+ * My Account
+ */
+@import "plugins/woocommerce/my_account";
+
+/**
+ * General WooCommerce components
+ */
+@import "plugins/woocommerce/components";
+/**
+ * Wish list page
+ */
+@import "plugins/woocommerce/wish_list";
+
+/**
+ * WooCommerce widgets
+ */
+@import "plugins/woocommerce/widgets";

@@ -1,0 +1,7 @@
+.sticky {
+  display: block;
+}
+
+.updated:not(.published) {
+  display: none;
+}

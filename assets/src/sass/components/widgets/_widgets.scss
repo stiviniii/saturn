@@ -1,0 +1,105 @@
+.widget {
+  margin: 0 0 1.5em;
+
+  // Make sure select elements fit in widgets.
+  select {
+    max-width: 100%;
+  }
+}
+
+.myReviews {
+  background-color: hsl(var(--clr-white));
+  border-radius: var(--br);
+
+  .reviews {
+    padding: 2rem;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      .initials {
+        background-color: hsl(var(--clr-blue));
+        color: hsl(var(--clr-white));
+        height: 8rem;
+        width: 8rem;
+        border-radius: 50%;
+        line-height: 1;
+        display: grid;
+        place-items: center;
+        font-size: var(--fs-2);
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      &--right {
+        svg {
+          fill: hsl(var(--clr-yellow));
+        }
+      }
+    }
+
+    &__body {
+      p {
+        padding-block: 2rem;
+      }
+    }
+  }
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-block-end: 1.5rem;
+
+  &:has(.btn) {
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+  }
+  &__title {
+    margin: 0;
+  }
+
+  &__pagination {
+    display: flex;
+    gap: 2rem;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+
+    &--prev,
+    &--next {
+      height: 4rem;
+      width: 4rem;
+      border-radius: var(--br);
+      background-color: hsl(var(--clr-blue));
+      transition: all 0.2s var(--anim);
+
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+
+      svg {
+        fill: hsl(var(--clr-white));
+      }
+
+      &:hover {
+        background-color: hsl(var(--clr-accent));
+      }
+    }
+  }
+}
+
+@import "destination-carousel";
+
+@import "fleetcard";
+@import "safaricard";
+@import "swiper";

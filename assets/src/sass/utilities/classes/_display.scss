@@ -1,0 +1,127 @@
+/* ie9+ */
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.key-title {
+  font-size: var(--fs-heading);
+  font-family: var(--title-font);
+  line-height: 1;
+  letter-spacing: 5px;
+}
+
+.text-init {
+  text-transform: initial;
+}
+.text-center {
+  text-align: center;
+}
+
+.x-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sub-title {
+  letter-spacing: 2px;
+  margin: 0;
+}
+.bs {
+  box-shadow: var(--bs);
+  outline: 1px solid hsl(var(--clr-black), 0.06);
+}
+.unlist {
+  list-style-type: none;
+}
+.br {
+  border-radius: 5px;
+}
+.br-2 {
+  border-radius: 2rem;
+}
+.o-hidden {
+  overflow: hidden;
+}
+.p-absolute {
+  position: absolute;
+}
+.p-relative {
+  position: relative;
+}
+.d-block {
+  display: block;
+}
+.d-flex {
+  display: flex;
+}
+.justify-center {
+  justify-content: center;
+}
+.align-center {
+  align-items: center;
+}
+.d-none {
+  display: none;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.numbered {
+  position: relative;
+
+  &::before {
+    content: counters(number-counter, ".") " ";
+    line-height: 36px;
+    display: inline-block;
+    min-width: 36px;
+    margin: 0 0.825rem 0 0;
+    padding: 0 5px;
+    text-align: center;
+    vertical-align: 5px;
+    color: hsl(var(--clr-white));
+    border-radius: 3px;
+    background: hsl(var(--clr-accent));
+    background: linear-gradient(
+      45deg,
+      hsl(var(--clr-black), 0.95) 0%,
+      hsl(var(--clr-accent)) 100%
+    );
+    font-size: 20px;
+    font-size: 1.65rem;
+  }
+}
+
+.wp-block-columns {
+  counter-increment: number-counter;
+}
+
+.home {
+  .is-layout-flex {
+    align-items: center !important;
+
+    &:has(.contact-info) {
+      align-items: stretch !important;
+      margin-top: 12rem;
+    }
+  }
+}
+.allShade {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  backdrop-filter: blur(10px);
+  transition: 0.3s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}

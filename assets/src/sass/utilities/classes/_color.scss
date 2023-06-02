@@ -1,0 +1,56 @@
+.shade-one {
+  background-color: hsl(var(--clr-accent), 0.04);
+}
+
+.dark-bg {
+  background-color: hsl(var(--clr-black));
+}
+
+.clr-yellow {
+  color: hsl(var(--clr-yellow));
+}
+.clr-accent {
+  color: hsl(var(--clr-accent));
+}
+.clr-white {
+  color: hsl(var(--clr-white));
+}
+.clr-shade {
+  background-color: hsl(var(--clr-cream));
+}
+
+.clr-shade-sec {
+  background-color: hsl(var(--clr-cream-sec));
+}
+
+.shade-bleed {
+  background-color: hsl(var(--clr-cream));
+  box-shadow: 0 0 0 100vmax hsl(var(--clr-cream));
+  clip-path: inset(0 -100vmax);
+}
+
+.shade-overflow-2 {
+  background-color: hsl(var(--clr-black), 0.35);
+  box-shadow: 0 0 0 100vmax hsl(var(--clr-black), 0.35);
+  clip-path: inset(0 -100vmax);
+}
+
+// .shade-two {
+//   background-color: hsl(var(--clr-dark), 0.03);
+// }
+
+// .clr-white {
+//   background-color: hsl(var(--clr-white));
+// }
+
+// .clr-accent {
+//   color: hsl(var(--clr-accent));
+// }
+.barner-shadow {
+  background-color: hsl(var(--clr-blue), 0.9);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

@@ -1,0 +1,48 @@
+$color__background-body: #fff;
+$color__background-screen: #f1f1f1;
+$color__background-hr: #ccc;
+$color__background-button: #e6e6e6;
+$color__background-pre: #eee;
+$color__background-ins: #fff9c0;
+$color__ins: #ff5948;
+
+$color__text-screen: #21759b;
+$color__text-input: #666;
+$color__text-input-focus: #111;
+$color__link: #4169e1; //royalblue
+$color__link-visited: #800080; //purple
+$color__link-hover: #191970; //midnightblue
+$color__text-main: #404040;
+
+$color__border-button: #ccc #ccc #bbb;
+$color__border-button-hover: #ccc #bbb #aaa;
+$color__border-button-focus: #aaa #bbb #bbb;
+$color__border-input: #ccc;
+$color__border-abbr: #666;
+
+:root {
+  --hue: ;
+  --anim: cubic-bezier(0.86, -0.1, 0.27, 1.15);
+
+  --clr-accent: 265, 44%, 39%;
+  --clr-sec: 33, 95%, 53%;
+  --clr-white: 0, 0%, 100%;
+  --clr-black: 0, 0%, 13%;
+
+  --clr-light-one: 0, 0%, 96%;
+  --clr-light-two: 0, 12%, 90%;
+  --clr-light-three: 0, 0%, 83%;
+
+  --clr-gradient: linear-gradient(
+    to bottom left,
+    hsl(var(--clr-sec)),
+    hsl(var(--clr-accent))
+  );
+
+  --bs: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+
+  --swiper-theme-color: hsl(var(--clr-accent));
+  --swiper-pagination-bullet-inactive-color: hsl(var(--clr-sec));
+
+  color-scheme: light;
+}

@@ -1,0 +1,87 @@
+.fleet-card {
+  display: block;
+  background-color: hsl(var(--clr-white));
+  text-decoration: none;
+  border-radius: var(--br);
+  overflow: hidden;
+
+  &:hover {
+    .price {
+      background-color: hsl(var(--clr-black));
+    }
+    .card-title {
+      color: hsl(var(--clr-blue));
+    }
+  }
+
+  figure {
+    margin: 0;
+  }
+  &__img {
+  }
+
+  &__content {
+    .card-title {
+      padding-inline: 2rem;
+      margin-block: 1rem;
+      color: hsl(var(--clr-black));
+      transition: color 0.25s var(--anim);
+    }
+    .offer {
+      position: absolute;
+      color: hsl(var(--clr-white));
+      overflow: hidden;
+      width: 10rem;
+      height: 10rem;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        background-image: linear-gradient(
+          45deg,
+          #ff6547 0%,
+          #ffb144 51%,
+          #ff7053 100%
+        );
+        transform: rotate(-45deg) translateY(-20px);
+        display: flex;
+        justify-content: center;
+        padding: 0.3rem 0.6rem;
+        position: absolute;
+        width: 150%;
+      }
+    }
+    &--features {
+      padding-inline: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      color: hsl(var(--clr-black), 0.7);
+      margin-bottom: 1rem;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        svg {
+          fill: currentColor;
+          height: 1.2rem;
+          width: auto;
+        }
+      }
+    }
+    .price {
+      background-color: hsl(var(--clr-blue));
+      padding: 1rem;
+      text-align: center;
+      color: hsl(var(--clr-white));
+      font-size: var(--fs-4);
+      margin-bottom: 0;
+      transition: background-color 0.25s var(--anim);
+    }
+  }
+}

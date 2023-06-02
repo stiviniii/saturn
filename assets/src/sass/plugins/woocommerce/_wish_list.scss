@@ -1,0 +1,73 @@
+/**
+*   Wish List Page
+*/
+
+table.wishlist_table {
+  border-collapse: collapse;
+  font-size: inherit;
+
+  a {
+    text-decoration: none;
+  }
+
+  thead {
+    background-color: hsl(var(--clr-black));
+    color: hsl(var(--clr-white));
+  }
+
+  tbody {
+    tr {
+      background-color: hsl(var(--clr-accent), 0.02);
+      border-right: 1px;
+      border-left: 1px;
+      border-bottom: 1px;
+      border-top: 0;
+      border-style: solid;
+      border-color: hsl(var(--clr-black), 0.05);
+
+      .remove {
+        color: $color__ins;
+        font-size: var(--fs-2);
+        font-weight: 600;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: hsl(var(--clr-black));
+        }
+      }
+
+      .product-name {
+        a {
+          color: hsl(var(--clr-accent));
+          transition: 0.2s ease color;
+
+          &:hover {
+            color: hsl(var(--clr-black));
+          }
+        }
+      }
+
+      .product-add-to-cart {
+        & > * {
+          &:not(:last-child) {
+            margin-bottom: 0.5rem;
+          }
+        }
+        .wp-element-button {
+          display: inline-block !important;
+          padding: 0.8rem 1.6rem;
+          background-color: hsl(var(--clr-sec));
+        }
+
+        .remove_from_wishlist {
+          color: $color__ins;
+          background-color: transparent;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

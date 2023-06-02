@@ -1,0 +1,31 @@
+$font__main: "Crimson Text", serif;
+// stylelint-enable value-keyword-case
+$font__code: monaco, consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+$font__pre: "Courier 10 Pitch", courier, monospace;
+// $font__line-height-body: 1.4;
+$font__line-height-body: 1.5;
+$font__line-height-pre: 1.6;
+
+:root {
+  --font-main: "Montserrat", sans-serif;
+  // --font-title: "Cardo", serif;
+  --font-title: "Montserrat", sans-serif;
+  // --fs-font: clamp(1.4rem, 1vw + 1rem, 1.6rem);
+  // --fs-font: 20px;
+  --fs-font: 16px;
+  --ls: 0.019em;
+  --fs-1: clamp(2.8rem, 2vw + 1.25rem, 3.7rem);
+  // --fs-2: clamp(2.4rem, 1vw + 2rem, 3.2rem);
+  // --fs-2: clamp(1.5rem, 3vw, 2.5rem);
+  --fs-2: clamp(2.6rem, 1vw + 1.75rem, 3rem);
+  // --fs-3: clamp(2.2rem, 1vw + 1.5rem, 2.6rem);
+  --fs-3: clamp(2.2rem, 1vw + 1.5rem, 2.6rem);
+  // --fs-4: clamp(1.8rem, 1vw + 1rem, 2.2rem);
+  --fs-4: clamp(2rem, 1vw + 1rem, 2.2rem);
+  // --fs-5: clamp(1.6rem, 1vw + 1.25rem, 2rem);
+  --fs-5: clamp(1.8rem, 1vw + 1rem, 2rem);
+  // --fs-6: clamp(1.6rem, 1vw + 1rem, 1.8rem);
+  --fs-6: clamp(1.6rem, 1vw + 1rem, 1.8rem);
+
+  --text-s: 0 1px 0 rgba(0, 0, 0, 0.4);
+}

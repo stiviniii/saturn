@@ -1,0 +1,314 @@
+a {
+  color: $color__link;
+
+  &:visited {
+    // color: $color__link-visited;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color__link-hover;
+  }
+
+  &:hover,
+  &:active {
+    outline: 0;
+  }
+}
+
+.wpb-pcf-btn.wpb-pcf-btn-large:is(.btn-stroke) {
+  &,
+  &:focus {
+    padding: 1.2rem 3.4rem;
+    font-size: var(--fs-4);
+    background-color: transparent;
+    color: hsl(var(--clr-yellow));
+    line-height: 1;
+    font-weight: 500;
+
+    &:hover {
+      background-color: none;
+      background-image: var(--clr-gradient);
+      color: hsl(var(--clr-white));
+    }
+  }
+}
+.wpb-pcf-btn.wpb-pcf-btn-large:not(.btn-stroke) {
+  &,
+  &:focus {
+    padding: 1rem 2rem;
+    font-size: var(--fs-font);
+    background-image: var(--clr-gradient);
+    line-height: 1;
+
+    &:hover {
+      background-color: none;
+      background-image: var(--clr-gradient);
+    }
+  }
+}
+.wpb-pcf-btn-loading {
+  &::before {
+    content: none;
+  }
+}
+.btn {
+  line-height: 1;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s var(--anim);
+  border: 0;
+  cursor: pointer;
+
+  &-sec {
+    color: hsl(var(--clr-black));
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    font-size: var(--fs-4);
+    line-height: 1.5;
+    transform: translateX(-1rem);
+    width: fit-content;
+
+    &::before {
+      background-color: hsl(var(--clr-white));
+      content: "";
+      display: inline-block;
+      height: 2px;
+      margin-right: 1rem;
+      transition: all 0.42s var(--anim);
+      width: 0;
+    }
+
+    &:hover {
+      transform: translateX(1px);
+      &::before {
+        width: 3rem;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 0.8rem 2.6rem;
+  }
+  &-outline {
+    line-height: 1;
+    border-radius: var(--br);
+    text-decoration: none;
+    color: hsl(var(--clr-accent));
+    border: 1px solid currentColor;
+    width: fit-content;
+
+    &:hover {
+      color: hsl(var(--clr-white));
+      background-color: hsl(var(--clr-accent));
+      border-color: hsl(var(--clr-accent));
+    }
+  }
+  &-icon {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  &-line {
+    text-decoration: none;
+
+    position: relative;
+    display: flex;
+    font-weight: 600;
+    gap: 0.5rem;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+
+    // width: -webkit-fit-content;
+    // width: -moz-fit-content;
+    width: fit-content;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 0;
+      left: 0;
+      bottom: -7px;
+      background: hsl(var(--clr-accent));
+      height: 2px;
+      transition: 0.3s ease-out;
+    }
+
+    span {
+      margin: 0;
+      position: relative;
+      font-size: var(--fs-5);
+      display: block;
+      color: hsl(var(--clr-black));
+
+      &::before {
+        position: absolute;
+        /*   box-sizing: border-box; */
+        content: "Learn more";
+        width: 0%;
+        inset: 0;
+        color: hsl(var(--clr-accent));
+        overflow: hidden;
+        transition: 0.3s ease-out;
+      }
+    }
+
+    svg {
+      fill: hsl(var(--clr-black));
+      transition: 0.2s;
+      position: relative;
+      width: var(--fs-5);
+      transition-delay: 0.2s;
+    }
+
+    &:hover {
+      color: currentColor;
+
+      &::after {
+        width: 100%;
+      }
+
+      span {
+        &::before {
+          width: 100%;
+        }
+      }
+
+      svg {
+        transform: translateX(4px);
+        fill: hsl(var(--clr-accent));
+      }
+    }
+  }
+
+  &-arrow {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.2rem 3.4rem;
+    // border-radius: 3rem;
+    color: hsl(var(--clr-accent));
+    background-color: transparent;
+    box-shadow: 0 0 0 2px currentColor;
+    transition: all 0.25s ease;
+    font-weight: 500;
+    white-space: nowrap;
+
+    svg {
+      height: auto;
+      width: var(--fs-font);
+      fill: currentColor;
+    }
+
+    &:hover {
+      background-image: hsl(var(--clr-gradient));
+      color: hsl(var(--clr-white));
+      box-shadow: none;
+    }
+  }
+
+  &-primary,
+  &-stroke {
+    padding: 1.2rem 3.4rem;
+    font-size: var(--fs-4);
+    // border-radius: 3rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  &-primary {
+    // background-image: var(--clr-gradient);
+    background-color: hsl(var(--clr-accent));
+    color: hsl(var(--clr-white));
+
+    &[disabled] {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    &:not([disabled]) {
+      &:hover {
+        color: hsl(var(--clr-white));
+        box-shadow: 0 0 0 2px hsl(var(--clr-white)),
+          0 0 0 4px hsl(var(--clr-accent));
+      }
+    }
+  }
+
+  &-stroke {
+    background-color: transparent;
+    box-shadow: 0 0 0 2px currentColor;
+    transition: all 0.25s ease;
+
+    &:not(.btn-accent) {
+      color: hsl(var(--clr-yellow));
+    }
+
+    &.btn-accent {
+      color: hsl(var(--clr-accent));
+    }
+    &:hover {
+      background-image: var(--clr-gradient);
+      color: hsl(var(--clr-white));
+      box-shadow: none;
+    }
+  }
+
+  &-trek {
+    font-size: var(--fs-6);
+    display: block;
+    background-image: var(--clr-gradient);
+    // border-radius: 3rem;
+    color: hsl(var(--clr-white));
+    text-align: center;
+    padding: 1rem;
+
+    &:hover {
+      color: hsl(var(--clr-white));
+      box-shadow: 0 0 0 2px hsl(var(--clr-white)),
+        0 0 0 4px hsl(var(--clr-accent));
+    }
+  }
+}
+
+.book-the-tour {
+  padding: 1.2rem 3.4rem !important;
+  font-size: var(--fs-4) !important;
+}
+
+.wp-element-button {
+  background-color: hsl(var(--clr-black));
+  color: hsl(var(--clr-white));
+  transition: background-color 0.25 ease;
+  line-height: 1;
+  padding: 1.5rem 3rem;
+
+  &:hover {
+    background-color: hsl(var(--clr-accent));
+    color: hsl(var(--clr-white));
+  }
+}
+
+.wc-backward {
+  background-color: hsl(var(--clr-accent));
+  color: hsl(var(--clr-white));
+  display: inline-block;
+  padding: 1.2rem 2.4rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: hsl(var(--clr-white));
+    background-color: hsl(var(--clr-black));
+  }
+}

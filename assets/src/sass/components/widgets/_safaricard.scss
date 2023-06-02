@@ -1,0 +1,118 @@
+.safari-card {
+  display: block;
+  text-decoration: none;
+  border-radius: var(--br);
+  overflow: hidden;
+
+  figure {
+    margin: 0;
+
+    .safari-card__img {
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+  }
+
+  &:hover {
+    .safari-media-box {
+      &::before {
+        background-color: rgba(0, 0, 0, 0.55);
+      }
+    }
+    .safari-card__content {
+      :where(.card-cta) {
+        background-color: hsl(var(--clr-yellow), 0.75);
+      }
+    }
+  }
+
+  .safari-media-box {
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.35);
+      transition: background-color 0.3s ease;
+      z-index: 2;
+    }
+  }
+  &__content {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 3;
+
+    .price {
+      position: absolute;
+      color: hsl(var(--clr-white));
+      overflow: hidden;
+      width: 13rem;
+      height: 13rem;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & > span {
+        background-image: linear-gradient(
+          45deg,
+          #ff6547 0%,
+          #ffb144 51%,
+          #ff7053 100%
+        );
+        transform: rotate(-45deg) translateY(-20px);
+        display: flex;
+        justify-content: center;
+        // padding: 0.3rem 0.6rem;
+        padding: 0.6rem 0.6rem;
+        position: absolute;
+        width: 150%;
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+
+        span {
+          font-size: 1.3rem;
+          font-weight: normal;
+        }
+      }
+    }
+
+    .card-header {
+      width: fit-content;
+      border-bottom: 1px solid hsl(var(--clr-white));
+      padding-bottom: 1rem;
+    }
+    .card-header,
+    .sub-header {
+      color: hsl(var(--clr-white));
+    }
+    .sub-header {
+      margin-bottom: 0;
+    }
+    .card-cta {
+      padding: 1rem 2rem;
+      background-color: hsl(var(--clr-yellow));
+      color: hsl(var(--clr-black));
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: hsl(var(--clr-yellow));
+      }
+    }
+  }
+}
