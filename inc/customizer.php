@@ -42,6 +42,13 @@ function saturn_customize_register( $wp_customize ) {
 			'description'	=> 'Copyright Section'
 		)
 	);
+	// Custom product customization
+	$wp_customize->add_section( 
+		'sec_product_customize', array(
+			'title'			=> 'Cusom Product Customization',
+			'description'	=> 'Settings for home page etc'
+		)
+	);
 	
 		// Field 1 - Copyright Text Box
 		$wp_customize->add_setting(
@@ -59,6 +66,64 @@ function saturn_customize_register( $wp_customize ) {
 				'description'			=> 'Please, add your copyright information here',
 				'section'				=> 'sec_copyright',
 				'type'					=> 'text'
+			)
+		);
+
+
+
+		// Deal of the week Checkbox
+		$wp_customize->add_setting(
+			'set_deal_show', array(
+				'type'					=> 'theme_mod',
+				'default'				=> '',
+				'sanitize_callback'		=> 'saturn_sanitize_checkbox'
+			)
+		);
+
+
+		$wp_customize->add_control(
+			'set_deal_show', array(
+				'label'					=> 'Show Deal of the week?',
+				'section'				=> 'sec_product_customize',
+				'type'					=> 'checkbox'
+			)
+		);
+
+		// Deal Section title
+		$wp_customize->add_setting(
+			'set_deal_title', array(
+				'type'					=> 'theme_mod',
+				'default'				=> '',
+				'sanitize_callback'		=> 'sanitize_text_field'
+			)
+		);
+
+		
+		$wp_customize->add_control(
+			'set_deal_title', array(
+				'label'					=> 'Deal Section Title',
+				'description'			=> 'Please, add the text that you want to display as a title in the front end',
+				'section'				=> 'sec_product_customize',
+				'type'					=> 'text'
+			)
+		);
+		
+		// Deal of the Week Product ID
+		$wp_customize->add_setting(
+			'set_deal', array(
+				'type'					=> 'theme_mod',
+				'default'				=> '',
+				'sanitize_callback'		=> 'sanitize_text_field'
+			)
+		);
+
+		
+		$wp_customize->add_control(
+			'set_deal', array(
+				'label'					=> 'Deal of the week Product ID',
+				'description'			=> 'Product ID to Display',
+				'section'				=> 'sec_product_customize',
+				'type'					=> 'number'
 			)
 		);
 
@@ -92,42 +157,52 @@ function saturn_customize_register( $wp_customize ) {
 	// 	}
 	// }
 
-	$num_columns = 4;
+	// $num_columns = 4;
 
-    // Add Footer Links section
-    $wp_customize->add_section('footer_links_section', array(
-        'title' => 'Footer Links',
-        'priority' => 120,
-    ));
+    // // Add Footer Links section
+    // $wp_customize->add_section('footer_links_section', array(
+    //     'title' => 'Footer Links',
+    //     'priority' => 120,
+    // ));
 
     // Loop through columns
-    for ($col = 1; $col <= $num_columns; $col++) {
-        // Column Title setting
-        $title_setting_id = 'footer_column_title_' . $col;
-        $wp_customize->add_setting($title_setting_id, array(
-            'default' => 'Column ' . $col . ' Title',
-            'sanitize_callback' => 'sanitize_text_field',
-        ));
-        $wp_customize->add_control($title_setting_id, array(
-            'label' => 'Column ' . $col . ' Title',
-            'section' => 'footer_links_section',
-            'type' => 'text',
-        ));
+    // for ($col = 1; $col <= $num_columns; $col++) {
+    //     // Column Title setting
+    //     $title_setting_id = 'footer_column_title_' . $col;
+    //     $wp_customize->add_setting($title_setting_id, array(
+    //         'default' => 'Column ' . $col . ' Title',
+    //         'sanitize_callback' => 'sanitize_text_field',
+    //     ));
+    //     $wp_customize->add_control($title_setting_id, array(
+    //         'label' => 'Column ' . $col . ' Title',
+    //         'section' => 'footer_links_section',
+    //         'type' => 'text',
+    //     ));
 
-        // Column Text setting
-        $text_setting_id = 'footer_column_text_' . $col;
-        $wp_customize->add_setting($text_setting_id, array(
-            'default' => '',
-            'sanitize_callback' => 'sanitize_textarea_field',
-        ));
-        $wp_customize->add_control($text_setting_id, array(
-            'label' => 'Column ' . $col . ' Text',
-            'section' => 'footer_links_section',
-            'type' => 'textarea',
-        ));
-    }
+    //     // Column Text setting
+    //     $text_setting_id = 'footer_column_text_' . $col;
+    //     $wp_customize->add_setting($text_setting_id, array(
+    //         'default' => '',
+    //         'sanitize_callback' => 'sanitize_textarea_field',
+    //     ));
+    //     $wp_customize->add_control($text_setting_id, array(
+    //         'label' => 'Column ' . $col . ' Text',
+    //         'section' => 'footer_links_section',
+    //         'type' => 'textarea',
+    //     ));
+    // }
 }
 add_action( 'customize_register', 'saturn_customize_register' );
+
+
+/**
+ * Custom sanitization for checkbox
+ *
+ * @return void
+ */
+function saturn_sanitize_checkbox( $checked ) {
+	return ( ( isset ( $checked ) && true == $checked ) ? true : false );
+}
 
 /**
  * Render the site title for the selective refresh partial.

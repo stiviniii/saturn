@@ -366,3 +366,132 @@ p.no-comments {
     }
   }
 }
+
+.deal-of-the-week {
+  padding-block: 6rem;
+  margin-inline: auto;
+  max-width: var(--site_mini_width) !important;
+  width: 100%;
+
+  background-color: hsl(var(--clr-light-one));
+  box-shadow: 0 0 0 100vmax hsl(var(--clr-light-one));
+  clip-path: inset(0 -100vmax);
+
+  @media screen and (min-width: 48em) {
+    .deal-content-wrapper {
+      display: grid;
+      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
+
+      background-color: hsl(var(--clr-white));
+      background-image: repeating-radial-gradient(
+          circle at 0 0,
+          transparent 0,
+          hsl(var(--clr-white)) 10px
+        ),
+        repeating-linear-gradient(
+          hsl(var(--clr-light-two), 0.08),
+          hsl(var(--clr-light-three), 0.06)
+        );
+      // background: linear-gradient(
+      //   to bottom left,
+      //   hsl(var(--clr-light-one)),
+      //   hsl(var(--clr-light-two))
+      // );
+      border-top-right-radius: 4rem;
+      border-bottom-left-radius: 4rem;
+      overflow: hidden;
+      box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    }
+  }
+  &:hover {
+    .deal-of-the-week__figure {
+      &--img {
+        &.second-image {
+          opacity: 1;
+        }
+      }
+    }
+    .deal-of-the-week__body {
+      h3 {
+        a {
+          color: hsl(var(--clr-black));
+        }
+      }
+      .price {
+        .sale {
+          color: hsl(var(--clr-black));
+        }
+      }
+
+      .btn__deal-of-month {
+        background-color: hsl(var(--clr-accent));
+        color: hsl(var(--clr-white));
+      }
+    }
+  }
+  &__title {
+    @media screen and (min-width: 48em) {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  }
+  &__figure {
+    position: relative;
+    margin-block: 0;
+
+    &--img {
+      aspect-ratio: 4/5;
+      object-fit: cover;
+
+      &.second-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+      }
+    }
+  }
+  &__body {
+    @media screen and (min-width: 48em) {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    & > * {
+      &:not(:last-child) {
+        margin-bottom: 1.7rem;
+      }
+    }
+
+    .discount {
+      font-weight: 500;
+      font-size: var(--fs-6);
+    }
+
+    h3 {
+      a {
+        text-decoration: none;
+        color: hsl(var(--clr-accent));
+        transition: color 0.3s var(--anim);
+      }
+    }
+
+    .price {
+      font-size: var(--fs-5);
+      font-weight: 600;
+
+      .regular {
+        // color: hsl(var(--clr-light-three));
+        color: #b7b7b7;
+        font-weight: 400;
+        transition: color 0.3s var(--anim);
+      }
+      .sale {
+        color: hsl(var(--clr-accent));
+        transition: color 0.3s var(--anim);
+      }
+    }
+  }
+}

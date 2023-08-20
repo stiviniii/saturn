@@ -1,1 +1,1 @@
-module.exports = "../src/library/fonts/cardo-v19-latin/cardo-v19-latin-700.svg";
+module.exports = "../../src/library/fonts/cardo-v19-latin/cardo-v19-latin-700.svg";

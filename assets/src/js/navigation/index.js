@@ -105,3 +105,39 @@
   //   this.classList.toggle("activate");
   // });
 })();
+
+// Your other JavaScript code here
+
+// jQuery(document).ready(function ($) {
+//   $('.woocommerce form .woocommerce-Input[type="password"]').wrap(
+//     '<span class="password-input"></span>'
+//   );
+//   $(".woocommerce form input")
+//     .filter(":password")
+//     .parent("span")
+//     .addClass("password-input");
+
+//   $(".password-input").append(
+//     '<span class="show-password-input">' +
+//       '<svg width="16" height="16" aria-hidden="true"><use href="#eye-icon"></use></svg>' +
+//       '<svg width="16" height="16" aria-hidden="true"><use href="#eye-slash-icon"></use></svg>' +
+//       "</span>"
+//   );
+
+//   $(".show-password-input").on("click", function () {
+//     var passwordField = $(this).siblings('input[type="password"]');
+//     var eyeIcons = $(this).find("svg");
+
+//     if (passwordField.prop("type") === "password") {
+//       passwordField.prop("type", "text");
+//       eyeIcons.eq(0).hide();
+//       eyeIcons.eq(1).show();
+//     } else {
+//       passwordField.prop("type", "password");
+//       eyeIcons.eq(1).hide();
+//       eyeIcons.eq(0).show();
+//     }
+//   });
+// });
+
+

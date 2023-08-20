@@ -30,7 +30,7 @@ if ( $related_products ) : ?>
 			?>
 			<h2><?php echo esc_html( $heading ); ?></h2>
 		<?php endif; ?>
-		<div class="swiper related-products">
+		<div class="swiper related-products col-four">
 		<?php 
 		// woocommerce_product_loop_start();
 		 ?>

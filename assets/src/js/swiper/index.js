@@ -46,43 +46,6 @@ var fourcolNoAnim = new Swiper(".fourcolNoAnim", {
   },
 });
 
-var related = new Swiper(".related-products", {
-  slidesPerView: 4,
-  spaceBetween: 20,
-  loop: false,
-  centerSlide: false,
-  slidesPerGroupSkip: 1,
-  pagination: {
-    el: ".swiper-pagination",
-    dynamicBullets: true,
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    1200: {
-      slidesPerView: 3,
-      spaceBetween: 20,
-    },
-    1400: {
-      slidesPerView: 4,
-      spaceBetween: 20,
-    },
-  },
-  scrollbar: {
-    el: ".swiper-scrollbar",
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
-
 const colFour = new Swiper(".col-four", {
   slidesPerView: 4,
   // centeredSlides: true,
@@ -109,38 +72,6 @@ const colFour = new Swiper(".col-four", {
     1200: {
       slidesPerView: 4,
       spaceBetween: 15,
-    },
-  },
-});
-
-var safari = new Swiper(".safari", {
-  slidesPerView: 2,
-  spaceBetween: 20,
-  slidesPerGroup: 1,
-  loop: true,
-  loopFillGroupWithBlank: true,
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-    pauseOnMouseEnter: true,
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    // clickable: true,
-    dynamicBullets: true,
-  },
-  navigation: {
-    nextEl: ".safari-button-next",
-    prevEl: ".safari-button-prev",
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-    992: {
-      slidesPerView: 2,
-      spaceBetween: 20,
     },
   },
 });
@@ -172,6 +103,38 @@ var postSlider = new Swiper(".post-slider", {
     1200: {
       slidesPerView: 3,
       spaceBetween: 20,
+    },
+  },
+});
+
+const swiper = new Swiper(".homeslider", {
+  effect: "coverflow",
+  grabCursor: true,
+  centeredSlides: true,
+  coverflowEffect: {
+    rotate: 0,
+    stretch: 0,
+    depth: 100,
+    modifier: 3,
+    slideShadows: true,
+  },
+  loop: true,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  breakpoints: {
+    640: {
+      slidesPerView: 2,
+    },
+    768: {
+      slidesPerView: 1,
+    },
+    1024: {
+      slidesPerView: 2,
+    },
+    1560: {
+      slidesPerView: 3,
     },
   },
 });

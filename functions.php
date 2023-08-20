@@ -76,8 +76,9 @@ if ( ! defined( 'SATURN_BUILD_CSS_DIR_PATH' )) {
 
 
 require_once SATURN_DIR_PATH. '/inc/helpers/autoloader.php';
+if ( class_exists( 'WooCommerce' ) ) {
 require_once SATURN_DIR_PATH. '/inc/helpers/template-tags.php';
-
+}
 function saturn_get_theme_instance() {
 	\SATURN_THEME\Inc\SATURN_THEME::get_instance();
 }
@@ -114,6 +115,10 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 /**
  * Load WooCommerce compatibility file.
  */
+if ( class_exists( 'WooCommerce' ) ) {
+	require_once SATURN_DIR_PATH. '/inc/helpers/wc-tags.php';
+}
+
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }

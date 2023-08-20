@@ -39,7 +39,7 @@
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 
-	<?php if (is_shop()) : ?>
+	<?php if (is_shop() || is_product_category()) : ?>
 		<aside id="secondary" class="widget-area slide-sidebar">
 			<?php 	
 			if (is_active_sidebar('sidebar-shop')) :

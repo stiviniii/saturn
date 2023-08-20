@@ -181,7 +181,7 @@ function saturn_close_container_row() {
 add_action( 'wp', 'saturn_remove_sidebar_product_pages' );
  
 function saturn_remove_sidebar_product_pages() {
-    if ( is_product() || is_shop() ) {
+    if ( is_product() || is_shop() || is_product_category()) {
     remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
     }
 }
@@ -252,16 +252,15 @@ function modify_short_description_position() {
     if (!empty($short_description)) {
         // Adding title to short description
         function add_short_description_title() {
-            echo '<details class="accordion last" role="tabpanel"><summary class="accordion-summary" aria-expanded="false"><h5>' . esc_html__( 'Material', 'saturn' ) . '</h5></summary>';
+            echo '<details class="accordion last"><summary class="accordion-summary" aria-expanded="false"><h5>' . esc_html__( 'Material', 'saturn' ) . '</h5></summary>';
         }
         add_action( 'woocommerce_single_product_summary', 'add_short_description_title', 62 );
 
         // Wrapping the short description inside a div with class "panel"
         function wrap_short_description_with_panel() {
-            echo '<div class="panel" aria-hidden="true"><div class="panel__inner">';
-
+            echo '<div class="panel">';
             woocommerce_template_single_excerpt();
-            echo '</div></div>';
+            echo '</div>';
         }
         add_action( 'woocommerce_single_product_summary', 'wrap_short_description_with_panel', 63 );
 
@@ -690,9 +689,9 @@ add_action('save_post', 'save_size_fit_meta_box');
 function display_size_fit_section() {
     $size_fit = get_post_meta(get_the_ID(), '_size_fit', true);
     if (!empty($size_fit)) {
-        echo '<details class="accordion" role="tabpanel">';
-        echo '<summary class="accordion-summary" aria-expanded="false"><h5>' . esc_html__('Size & Fit', 'saturn') . '</h5></summary>';
-        echo '<div class="panel" aria-hidden="true"><div class="panel__inner">' . wpautop(wp_kses_post($size_fit)) . '</div></div>';
+        echo '<details class="accordion">';
+        echo '<summary class="accordion-summary"><h5>' . esc_html__('Size & Fit', 'saturn') . '</h5></summary>';
+        echo '<div class="panel"><div class="woocommerce-product-details__size-fit">' . wpautop(wp_kses_post($size_fit)) . '</div></div>';
         echo '</details>';
     }
 }
@@ -774,7 +773,6 @@ add_action('woocommerce_shop_loop_item_title', 'display_default_attributes_after
 
 
 
-
 /**
  * Product shortcode for woocommerce
  * [display-product post_type="product" category="electronics" custom_class="my-custom-class" featured_only="true" most_viewed="true"]
@@ -791,6 +789,7 @@ function saturn_display_product_shortcode( $atts ) {
             'most_viewed'     => false, // Default value for most viewed products
             'show_pagination' => false, // Default value for showing pagination            
             'limit'            => 4, // Default value for no limit (-1 means no limit)  
+            'tag'             => '', // Default value for product tag
         ),
         $atts
     );
@@ -798,13 +797,14 @@ function saturn_display_product_shortcode( $atts ) {
     $output = ''; // Initialize output variable
 
     // Sanitize and validate input values
-    $post_type = sanitize_text_field( $atts['post_type'] );
-    $category = sanitize_text_field( $atts['category'] );
-    $custom_class = esc_attr( $atts['custom_class'] );
-    $featured_only = filter_var( $atts['featured_only'], FILTER_VALIDATE_BOOLEAN );
-    $most_viewed = filter_var( $atts['most_viewed'], FILTER_VALIDATE_BOOLEAN );
-    $show_pagination = filter_var( $atts['show_pagination'], FILTER_VALIDATE_BOOLEAN );
-    $limit = intval( $atts['limit'] );
+    $post_type           = sanitize_text_field( $atts['post_type'] );
+    $category            = sanitize_text_field( $atts['category'] );
+    $custom_class        = esc_attr( $atts['custom_class'] );
+    $featured_only       = filter_var( $atts['featured_only'], FILTER_VALIDATE_BOOLEAN );
+    $most_viewed         = filter_var( $atts['most_viewed'], FILTER_VALIDATE_BOOLEAN );
+    $show_pagination     = filter_var( $atts['show_pagination'], FILTER_VALIDATE_BOOLEAN );
+    $limit               = intval( $atts['limit'] );
+    $tag                 = sanitize_text_field( $atts['tag'] );
 
     ob_start(); // Start output buffering
 
@@ -839,6 +839,15 @@ function saturn_display_product_shortcode( $atts ) {
             'taxonomy' => 'product_cat',
             'field'    => 'slug',
             'terms'    => $category,
+        );
+    }
+
+    
+    if ( ! empty( $tag ) ) {
+        $rp_query_args['tax_query'][] = array(
+            'taxonomy' => 'product_tag',
+            'field'    => 'slug',
+            'terms'    => $tag,
         );
     }
 
@@ -893,7 +902,8 @@ add_shortcode( 'display-product', 'saturn_display_product_shortcode' );
 
 // Remove shop title from WooCommerce shop page
 function remove_shop_title($title) {
-    if (is_shop()) {
+    // if (is_shop()) {
+    if (is_shop() || is_product_category()) {
         $title = '';
     }
     return $title;
@@ -904,7 +914,7 @@ add_filter('woocommerce_show_page_title', 'remove_shop_title');
 
 // Modify shop title and add button in WooCommerce shop page
 function saturn_modify_shop_header() {
-    if (is_shop()) {
+    if (is_shop() || is_product_category()) :
         $title = get_the_title(get_option('woocommerce_shop_page_id'));
         echo '<header class="shop-woocommerce-products-header">';
         echo '<h1 class="shop-title">' . $title . '</h1>';
@@ -913,6 +923,177 @@ function saturn_modify_shop_header() {
         echo '<span>' . esc_html__('filter & sort', 'saturn') . '</span>';
         echo '</button>';
         echo '</header>';
-    }
+    endif;
 }
 add_action('woocommerce_before_main_content', 'saturn_modify_shop_header', 22);
+
+
+
+/**
+ * This will show deal of the week using a shortcode 
+ * [deal_of_the_week]
+ * If you want additional control of the shortcode use
+ * [deal_of_the_week showdeal="1" deal="123"]
+ * but now the shortcode will no longer use entries from Theme customizer
+ */
+function deal_of_the_week_shortcode($atts) {
+    if (!class_exists('WooCommerce')) {
+        return ''; // WooCommerce is not active, return empty string
+    }
+
+    $atts = shortcode_atts(
+        array(
+            'showdeal' => get_theme_mod( 'set_deal_show', 0 ),
+            'deal' => get_theme_mod( 'set_deal' ),
+        ),
+        $atts
+    );
+
+    $showdeal = $atts['showdeal'];
+    $deal = $atts['deal'];
+    $currency = get_woocommerce_currency_symbol();
+
+    // Check if deal is set and is a valid product ID
+    if (empty($deal) || !is_numeric($deal)) {
+        return ''; // Return empty if deal is not set or is not a valid product ID
+    }
+
+    // Retrieve the product object
+    $product = wc_get_product($deal);
+
+    // Check if the product is a variable product
+    if ($product->is_type('variable')) {
+        // Get the variations
+        $variations = $product->get_available_variations();
+
+        // Get the first variation
+        $first_variation = reset($variations);
+
+        // Retrieve the regular price
+        $regular = $first_variation['display_regular_price'];
+
+        // Retrieve the sale price
+        $sale = $first_variation['display_price'];
+    } else {
+        // Retrieve the regular price
+        $regular = $product->get_regular_price();
+
+        // Retrieve the sale price
+        $sale = $product->get_sale_price();
+    }
+
+    if ($showdeal == 1) {
+        // Calculate percentage
+        $deal_discount_percentage = absint(100 - (($sale / $regular) * 100));
+
+        // Retrieve the gallery image IDs
+        $gallery_image_ids = $product->get_gallery_image_ids();
+
+        ob_start();
+        ?>
+        <section class="deal-of-the-week" aria-label="Deal of the Week">
+            <h2 class="deal-of-the-week__title">
+                <?php 
+                /* retrive Title information from theme customizer */
+                echo get_theme_mod( 'set_deal_title', 'Deal of the week' ); 
+                ?>
+            </h2>
+
+            <div class="deal-content-wrapper">
+                <figure class="deal-of-the-week__figure">   
+                
+                <?php 
+                // Add yith like button
+                echo do_shortcode( '[yith_wcwl_add_to_wishlist] ' );
+                ?>
+                <a href="<?php echo esc_url(get_permalink($deal)); ?>">
+                    <?php
+                    $featured_image = get_the_post_thumbnail($deal, 'large', array('class' => 'deal-of-the-week__figure--img'));
+                    $second_image = wp_get_attachment_image($gallery_image_ids[0], 'large', false, array('class' => 'deal-of-the-week__figure--img second-image'));
+
+                    // Check if there is a second image
+                    if (!empty($gallery_image_ids[1])) {                    
+                        echo $featured_image; 
+                        echo $second_image; 
+                    } else {
+                        echo $featured_image; 
+                    }
+                    ?>
+                    </a>
+                </figure>
+
+                <div class="deal-of-the-week__body">
+                    <?php if (!empty($sale)) : ?>
+                        <span class="discount" aria-label="Discount"><?php echo $deal_discount_percentage . '% OFF'; ?></span>
+                    <?php endif; ?>
+                    <h3>
+                        <a href="<?php echo esc_url(get_permalink($deal)); ?>"><?php echo get_the_title($deal); ?></a>
+                    </h3>
+                    <div class="description">
+                        <?php
+                        // Retrieve the product description
+                        $description = $product->get_description();
+
+                        // Limit the description to 40 words
+                        $trimmed_description = wp_trim_words(wp_strip_all_tags($description), 25);
+
+                        // Output the trimmed description
+                        echo $trimmed_description;
+                        ?>
+                    </div>
+                    <div class="price">
+                        <del class="regular" aria-hidden="true" aria-label="Regular Price">
+                            <?php echo $currency . $regular; ?>
+                        </del>
+                        <?php if (!empty($sale)) : ?>
+                            <span class="sale" aria-label="Sale Price">
+                                <?php echo $currency . $sale; ?>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="product-attributes">
+                        <!-----------------------------------------
+                            The code for variation hould Go here 
+                        ------------------------------------------>
+                    </div>
+
+                    <?php
+                    // Check if the product is a variable product
+                    if ($product->is_type('variable')) {
+                        
+                        // Get the variations
+                        $variations = $product->get_available_variations();
+
+                        // Get the first variation
+                        $first_variation = reset($variations);
+
+                        // Get the variation ID
+                        $variation_id = $first_variation['variation_id'];
+
+                        // Get the add to cart URL for the variation
+                        $add_to_cart_url = esc_url($product->add_to_cart_url($variation_id));
+
+                        // Output the "Add to Basket" button
+                        ?>
+                        <a href="<?php echo $add_to_cart_url; ?>" class="btn btn__deal-of-month" aria-label="Add to Basket"><?php esc_html_e('Add to Basket', 'saturn'); ?></a>
+                        <?php
+                    } else {
+                        // If it's not a variable product, use the existing code
+                        ?>
+                        <a href="<?php echo esc_url('?add-to-cart=' . $deal); ?>" class="btn btn__deal-of-month" aria-label="Add to Basket"><?php esc_html_e('Add to Basket', 'saturn'); ?></a>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
+        <?php
+        return ob_get_clean();
+    }
+
+    return '';
+}
+add_shortcode('deal_of_the_week', 'deal_of_the_week_shortcode');
+
+

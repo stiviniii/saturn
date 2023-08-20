@@ -24,8 +24,8 @@
 }
 
 .shade-bleed {
-  background-color: hsl(var(--clr-cream));
-  box-shadow: 0 0 0 100vmax hsl(var(--clr-cream));
+  background-color: hsl(var(--clr-light-one));
+  box-shadow: 0 0 0 100vmax hsl(var(--clr-light-one));
   clip-path: inset(0 -100vmax);
 }
 
